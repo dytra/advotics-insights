@@ -41,10 +41,37 @@ main {
     background: white;
   }
 
+  .page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    background: $secondary-background;
+    .page-header {
+      // padding-left: 2em;
+      // box-sizing: border-box;
+      margin-bottom: 2em;
+      display: flex;
+      h1 {
+        flex: 1;
+        display: inline;
+        color: $third-text-color;
+        font-weight: 600;
+      }
+      .filterperiod-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+      }
+      // padding-left:3em;
+    }
+  }
+
   #insights {
     // border:1px solid green;
-    background: #f7f7f7;
-    padding: 2em;
+    background: $secondary-background;
+    // padding: 2em;
     flex: 7;
     display: flex;
     flex-wrap: wrap;
@@ -62,6 +89,7 @@ main {
   box-shadow: 0px 1px 3px $shadow-color;
   background: $primary-background;
   margin-right: 2em;
+  margin-bottom: 2em;
   border-radius: 2px;
   .card-title {
     padding: 1em;
@@ -83,7 +111,7 @@ main {
     &.first {
       background: #ffe7bd;
       .product-thumbnail {
-        flex:1.5;
+        flex: 1.5;
       }
     }
     .product-thumbnail {
@@ -99,15 +127,16 @@ main {
       color: $secondary-text-color;
       h4 {
         color: $primary-text-color;
-        margin-bottom: .5em;
+        margin-bottom: 0.5em;
+        font-weight: 600;
       }
       .extra-info {
-        font-size: .8rem;
-        display:flex;
+        font-size: 0.8rem;
+        display: flex;
         span {
-          flex:1;
+          flex: 1;
           &:first-child {
-            margin-right:.2em;
+            margin-right: 0.2em;
           }
         }
       }
@@ -117,4 +146,81 @@ main {
 
 .list-product-card {
   max-width: 250px;
+  // display:none;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.filter-period {
+  max-height: 1.25em;
+  background: white;
+  padding: 1em;
+  color: $secondary-text-color;
+  border-radius: 2px;
+  box-shadow: 0px 2px 3px $shadow-color;
+  display: inline-flex;
+  align-self: flex-end;
+  align-items: center;
+  width: auto;
+
+  i,
+  span,
+  svg {
+    margin-right: 1em;
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  .filter-period-expanded {
+    overflow: visible;
+    top: 150px;
+    position: relative;
+    background: white;
+    padding-left: 2em;
+    padding-bottom: 2em;
+    padding-right: 2em;
+    box-shadow: 0px 2px 3px $shadow-color;
+    border-radius: 5px;
+    .head {
+      display: flex;
+      justify-content: space-between;
+    }
+    .picker-container {
+      display: flex;
+      .range-date-option {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid $shadow-color;
+        padding-right: 1em;
+        button {
+          background: white;
+          border: none;
+          border-bottom: 1px solid $third-text-color;
+          text-align: left;
+          padding: 0.5em 0;
+          font-size: 1rem;
+          outline: none;
+          min-width:7em;
+          &:last-child {
+            background: $success-background;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            margin-top: 0.5em;
+          }
+        }
+      }
+      .calendar {
+        display:flex;
+        div .react-datepicker:first-child {
+          margin-right:1em;
+        }
+      }
+    }
+  }
+
+  // justify-content:space-between;
 }
