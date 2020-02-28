@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.scss";
+import { purchasingDataset } from "./datasets";
 import { TopNav, SideNav, Main, Insights } from "./components";
 
 export default function App() {
@@ -8,7 +9,7 @@ export default function App() {
       <TopNav />
       <Main>
         <SideNav />
-        <Insights />
+        <Insights purchasingDataset={purchasingDataset} />
       </Main>
     </div>
   );
