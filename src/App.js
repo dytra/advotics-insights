@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-import { purchasingDataset } from "./datasets";
+import { purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset } from "./datasets";
 import { TopNav, SideNav, Main, Insights } from "./components";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
       <TopNav />
       <Main>
         <SideNav />
-        <Insights purchasingDataset={purchasingDataset} />
+        <Insights purchasingDataset={purchasingDataset} purchasingFields={purchasingFields} bestSellingDataset={bestSellingDataset} topCompetitorDataset={topCompetitorDataset} />
       </Main>
     </div>
   );

@@ -1,4 +1,4 @@
-const dataset2chart = ({ dataset, fields }) => {
+const dataset2chart = (dataset, fields ) => {
   const chartDataset = fields.map(field => {
     const chartDataObj = {
       label: field.label,

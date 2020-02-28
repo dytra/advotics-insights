@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Chart } from "chart.js";
-const Insights = ({ purchasingDataset }) => {
-  const randomScalingFactor = function() {
-    return Math.floor(Math.random(-100, 100) * 100);
-  };
+import { dataset2chart } from "../utils";
+import Card from "./Card.js";
+import ListProducts from "./ListProducts.js";
+const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset }) => {
 
   window.chartColors = {
     red: "rgb(255, 99, 132)",
@@ -15,10 +15,11 @@ const Insights = ({ purchasingDataset }) => {
     grey: "rgb(201, 203, 207)"
   };
   useEffect(() => {
-    console.log("purchasing datasets is");
-    console.log(purchasingDataset);
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myChart = new Chart(ctx, {
+    const purchasingDataChart = dataset2chart(purchasingDataset, purchasingFields);
+    console.log('purchasing datachart');
+    console.log(purchasingDataChart);
+    const ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
       type: "bar",
       data: {
         labels: [
@@ -30,52 +31,12 @@ const Insights = ({ purchasingDataset }) => {
           "June",
           "July"
         ],
-        datasets: [
-          {
-            label: "Nett",
-            backgroundColor: window.chartColors.red,
-            data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-            ]
-          },
-          {
-            label: "Apv",
-            backgroundColor: window.chartColors.blue,
-            data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-            ]
-          },
-          {
-            label: "Lpt",
-            backgroundColor: window.chartColors.green,
-            data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-            ]
-          }
-        ]
+        datasets: purchasingDataChart
       },
       options: {
         title: {
           display: true,
-          text: "Chart.js Bar Chart - Stacked"
+          text: "Average Purchase Value"
         },
         tooltips: {
           mode: "index",
@@ -96,14 +57,19 @@ const Insights = ({ purchasingDataset }) => {
         }
       }
     });
-  }, []);
+  }, [purchasingDataset, purchasingFields]);
   return (
     <div id="insights">
-      <div id="chart">
+      <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
         <canvas id="myChart" />
-      </div>
+      </Card>
 
-      <div id="best-sales">best sales</div>
+      <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">
+        <ListProducts dataset={bestSellingDataset} />
+      </Card>
+      <Card id="top-competitor" className="list-product-card" title="TOP COMPETITOR SKU">
+        <ListProducts dataset={topCompetitorDataset} />
+      </Card>
     </div>
   );
 };
