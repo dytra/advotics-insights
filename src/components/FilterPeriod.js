@@ -15,7 +15,6 @@ const FilterPeriod = ({ expanded, setExpanded, toggleExpand, filterPurchaseData 
   const [maxEndDate, setMaxEndDate] = useState(new Date());
   const [highlightedStartDate, setHighlightedStartDate] = useState([]);
   const [endDate, setEndDate] = useState(new Date());
-  const [selectedDateRange, setSelectedDateRange] = useState({});
   /* for timeperiod default (lastweek) */
   const strStartDateWeek = format(subDays(new Date(), 7), 'd MMMM yyyy');
   const strEndDateWeek = format(subDays(new Date(), 1), 'd MMMM yyyy');
@@ -23,9 +22,6 @@ const FilterPeriod = ({ expanded, setExpanded, toggleExpand, filterPurchaseData 
   /* */
 
 
-  const doSetSelectedDateRange = () => {
-    setSelectedDateRange({ from: startDate, to: endDate });
-  }
   /* filterMode listener */
   useEffect(() => {
     switch (filterMode) {
@@ -84,30 +80,6 @@ const FilterPeriod = ({ expanded, setExpanded, toggleExpand, filterPurchaseData 
           end: new Date(),
         }));
         break;
-      case "THIS_MONTH":
-        setStartDate(startOfMonth(new Date()));
-        setEndDate(new Date());
-        setMinStartDate(startOfMonth(new Date()));
-        setMaxStartDate(new Date());
-        setMinEndDate(startOfMonth(new Date()));
-        setMaxEndDate(new Date());
-        setHighlightedStartDate(eachDayOfInterval({
-          start: startOfMonth(new Date()),
-          end: new Date(),
-        }));
-        break;
-      case "THIS_MONTH":
-        setStartDate(startOfMonth(new Date()));
-        setEndDate(new Date());
-        setMinStartDate(startOfMonth(new Date()));
-        setMaxStartDate(new Date());
-        setMinEndDate(startOfMonth(new Date()));
-        setMaxEndDate(new Date());
-        setHighlightedStartDate(eachDayOfInterval({
-          start: startOfMonth(new Date()),
-          end: new Date(),
-        }));
-        break;
       case "CUSTOM":
         /* reset clock to 00:00 to prevent backdate on calling eachDayOfInterval */
         const currentDate = new Date();
@@ -128,7 +100,6 @@ const FilterPeriod = ({ expanded, setExpanded, toggleExpand, filterPurchaseData 
       default:
         console.error('none of the options are selected');
     }
-    doSetSelectedDateRange();
 
   }, [filterMode]);
 

@@ -5,7 +5,6 @@ const dataset2chart = (dataset, fields ) => {
       backgroundColor: field.backgroundColor,
       data: dataset.map(item => item[field.label])
     };
-    console.log(chartDataObj);
     return chartDataObj;
   });
   return chartDataset;

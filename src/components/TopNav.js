@@ -4,7 +4,7 @@ import profilePicture from "../assets/profile.svg";
 const TopNav = () => {
   return <nav id="top-nav">
     <div className="left">
-      <div className="logo"><img src={logo} /></div>
+      <div className="logo"><img src={logo} alt="advotics logo" /></div>
 
     </div>
     <div className="right">

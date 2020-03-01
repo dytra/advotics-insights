@@ -34,8 +34,6 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
       setAlertMessage('');
       const filteredDataSet = filterDataset({ dataset: purchasingDataset, filterMode, option: null });
       const datasetLabels = getDatasetLabels(filterMode);
-      console.log('labels are');
-      console.log(datasetLabels);
       const filteredDataChart = dataset2chart(filteredDataSet, purchasingFields);
       setPurchasingDataChart(filteredDataChart);
       setDatasetLabels(datasetLabels);
@@ -97,6 +95,8 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
         <div className="greenbar">
           <h3>MARKET INSIGHTS</h3>
         </div>
+
+        {alertMessage && <p className="alert">{alertMessage}</p>}
       
         <div className="card sales-turnover">
           <div className="card-header">
@@ -117,7 +117,7 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
         </div>
         <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
           <canvas id="myChart" />
-          {alertMessage && <p>{alertMessage}</p>}
+          
         </Card>
 
         <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">

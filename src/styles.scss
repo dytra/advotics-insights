@@ -372,3 +372,13 @@ main {
   margin-bottom: 2em;
   border-radius: 2px;
 }
+
+.alert {
+  background: #FFE7BD;
+  border-radius:3px;
+  margin-bottom:2em;
+  padding: .5em 1em;
+  text-align:center;
+  border:1px solid darken(#FFE7BD,10%);
+  color:darken(#FFE7BD,65%);
+}
