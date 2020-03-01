@@ -4,9 +4,8 @@ import "react-datepicker/dist/react-datepicker.min.css";
 import "./FilterPeriode.scss";
 import { format, subDays, eachDayOfInterval, subMonths } from "date-fns";
 import { startOfMonth } from "date-fns/esm";
-const FilterPeriod = () => {
-  const [expanded, setExpanded] = useState(false);
-  const toggleExpand = () => setExpanded(!expanded);
+const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
+
   const dateRangeStyle = expanded ? { display: 'none' } : { display: 'inline' };
   const [filterMode, setFilterMode] = useState('LAST_7_DAYS');
   const [startDate, setStartDate] = useState(new Date());
@@ -153,7 +152,8 @@ const FilterPeriod = () => {
   //   selectedDateRangeListener();
 
   // }, [selectedDateRangeListener]);
-  const handleDatePickerChange = (date, datePicker) => {
+  const handleDatePickerChange = (e,date, datePicker) => {
+    e.stopPropagation();
     if (filterMode === 'CUSTOM') {
       if (datePicker === "startDate") {
         setStartDate(date);
@@ -175,9 +175,14 @@ const FilterPeriod = () => {
     }
 
   }
+  const handleClickTimeOption = (e,option) => {
+    e.stopPropagation();
+    setFilterMode(option);
+    
 
+  }
   return (
-    <div className="filter-period">
+    <div className="filter-period" onClick={e => e.stopPropagation()}>
       {!expanded && <div className="filter-period-unexpanded">
         <i className="far fa-calendar-alt"></i>
         <span>Period</span>
@@ -197,14 +202,14 @@ const FilterPeriod = () => {
         </div>
         <div className="picker-container">
           <div className="range-date-option">
-            <button onClick={() => setFilterMode("TODAY")} className={filterMode === "TODAY" ? "filter-selected" : ""}>Today</button>
-            <button onClick={() => setFilterMode("YESTERDAY")} className={filterMode === "YESTERDAY" ? "filter-selected" : ""}>Yesterday</button> <button onClick={() => setFilterMode("LAST_7_DAYS")} className={filterMode === "LAST_7_DAYS" ? "filter-selected" : ""}>Last 7 Days</button> <button onClick={() => setFilterMode("LAST_30_DAYS")} className={filterMode === "LAST_30_DAYS" ? "filter-selected" : ""}>Last 30 days</button> <button onClick={() => setFilterMode("THIS_MONTH")} className={filterMode === "THIS_MONTH" ? "filter-selected" : ""}>This Month</button>
-            <button onClick={() => setFilterMode("CUSTOM")} className={filterMode === "CUSTOM" ? "filter-selected" : ""}>Custom</button>
+            <button onClick={(e) => handleClickTimeOption(e,"TODAY")} className={filterMode === "TODAY" ? "filter-selected" : ""}>Today</button>
+            <button onClick={(e) => handleClickTimeOption(e,"YESTERDAY")} className={filterMode === "YESTERDAY" ? "filter-selected" : ""}>Yesterday</button> <button onClick={(e) => handleClickTimeOption(e,"LAST_7_DAYS")} className={filterMode === "LAST_7_DAYS" ? "filter-selected" : ""}>Last 7 Days</button> <button onClick={(e) => handleClickTimeOption(e,"LAST_30_DAYS")} className={filterMode === "LAST_30_DAYS" ? "filter-selected" : ""}>Last 30 days</button> <button onClick={(e) => handleClickTimeOption(e,"THIS_MONTH")} className={filterMode === "THIS_MONTH" ? "filter-selected" : ""}>This Month</button>
+            <button onClick={(e) => handleClickTimeOption(e,"CUSTOM")} className={filterMode === "CUSTOM" ? "filter-selected" : ""}>Custom</button>
             <button onClick={handleClickApply}>Apply</button>
           </div>
           <div className="calendar">
-            <DatePicker inline minDate={minStartDate} maxDate={maxStartDate} highlightDates={highlightedStartDate} selected={startDate} onChange={(date) => handleDatePickerChange(date, "startDate")} />
-            <DatePicker inline minDate={minEndDate} maxDate={maxEndDate} highlightDates={highlightedStartDate} selected={endDate} onChange={(date) => handleDatePickerChange(date, "endDate")} />
+            <DatePicker inline minDate={minStartDate} maxDate={maxStartDate} highlightDates={highlightedStartDate} selected={startDate} onChange={(e,date) => handleDatePickerChange(date,e, "startDate")} />
+            <DatePicker inline minDate={minEndDate} maxDate={maxEndDate} highlightDates={highlightedStartDate} selected={endDate} onChange={(e,date) => handleDatePickerChange(date,e, "endDate")} />
           </div>
         </div>
 

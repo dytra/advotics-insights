@@ -4,7 +4,7 @@ import { dataset2chart } from "../utils";
 import Card from "./Card.js";
 import ListProducts from "./ListProducts";
 import FilterPeriod from "./FilterPeriod";
-const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset }) => {
+const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset, expanded, setExpanded, toggleExpand }) => {
 
   window.chartColors = {
     red: "rgb(255, 99, 132)",
@@ -60,29 +60,29 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
     });
   }, [purchasingDataset, purchasingFields]);
   return (
-      <div className="page">
-        <div className="page-header">
-          <h1>Dashboard</h1>
-          <div className="filterperiod-container">
-            <FilterPeriod/>
-            </div>
+    <div className="page">
+      <div className="page-header">
+        <h1>Dashboard</h1>
+        <div className="filterperiod-container">
+          <FilterPeriod expanded={expanded} setExpanded={setExpanded} toggleExpand={toggleExpand} />
         </div>
-        <div id="insights">
-          <div className="page-header">
-          </div>
-          <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
-            <canvas id="myChart" />
-          </Card>
-
-          <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">
-            <ListProducts dataset={bestSellingDataset} />
-          </Card>
-          <Card id="top-competitor" className="list-product-card" title="TOP COMPETITOR SKU">
-            <ListProducts dataset={topCompetitorDataset} />
-          </Card>
-        </div>
-
       </div>
+      <div id="insights">
+        <div className="page-header">
+        </div>
+        <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
+          <canvas id="myChart" />
+        </Card>
+
+        <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">
+          <ListProducts dataset={bestSellingDataset} />
+        </Card>
+        <Card id="top-competitor" className="list-product-card" title="TOP COMPETITOR SKU">
+          <ListProducts dataset={topCompetitorDataset} />
+        </Card>
+      </div>
+
+    </div>
   );
 };
 
