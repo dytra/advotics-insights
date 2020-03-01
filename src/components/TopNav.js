@@ -14,7 +14,7 @@ const TopNav = () => {
         </div>
         <div className="profile-picture"><img src={profilePicture} /></div>
       </div>
-      <button id="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+      <button id="btn-logout"><i className="fas fa-sign-out-alt"></i></button>
     </div>
   </nav>;
 };
