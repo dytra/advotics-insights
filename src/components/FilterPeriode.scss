@@ -1,11 +1,41 @@
+@import "../variables.scss";
+
 .filter-selected {
   font-weight: bold;
-  color:#37B04C;
+  color: #37b04c;
 }
 .react-datepicker__day--highlighted {
-  background-color:rgb(196, 238, 203);
+  background-color: rgb(196, 238, 203);
   font-weight: bold;
-  color:#37B04C;
-  border-radius:50%;
+  color: #37b04c;
+  border-radius: 50%;
   // display:none;
+  &:hover {
+    background-color: rgb(196, 238, 203);
+    color: #37b04c;
+    border-radius: 50%;
+  }
+}
+
+.react-datepicker__day--selected {
+  background-color: rgb(196, 238, 203);
+  font-weight: bold;
+  color: #37b04c;
+  border-radius: 50%;
+  outline:none;
+  &:hover {
+    background-color: rgb(196, 238, 203);
+  font-weight: bold;
+  color: #37b04c;
+  border-radius: 50%;
+  }
+}
+
+.react-datepicker__header {
+  background:white;
+  border-bottom:1px solid $shadow-color;
+}
+
+.react-datepicker {
+  border:0;
 }
