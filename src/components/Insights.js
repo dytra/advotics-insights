@@ -4,20 +4,20 @@ import { dataset2chart, filterDataset, getDatasetLabels } from "../utils";
 import Card from "./Card.js";
 import ListProducts from "./ListProducts";
 import FilterPeriod from "./FilterPeriod";
-
+import salesTurnover from "../assets/sales-turnover.svg";
 const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset, expanded, setExpanded, toggleExpand }) => {
   const [purchasingDataChart, setPurchasingDataChart] = useState(dataset2chart(purchasingDataset, purchasingFields));
   const [datasetLabels, setDatasetLabels] = useState([
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
   ]);
-  const [myChart,setMyChart] = useState('');
-  const [alertMessage,setAlertMessage] = useState('');
+  const [myChart, setMyChart] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   window.chartColors = {
     red: "rgb(255, 99, 132)",
@@ -30,24 +30,25 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
   };
 
   const filterPurchaseData = (filterMode) => {
-    if (filterMode === 'TODAY' || filterMode === 'YESTERDAY') {
+    if (filterMode === 'TODAY' || filterMode === 'YESTERDAY' || filterMode === 'LAST_7_DAYS') {
       setAlertMessage('');
       const filteredDataSet = filterDataset({ dataset: purchasingDataset, filterMode, option: null });
       const datasetLabels = getDatasetLabels(filterMode);
+      console.log('labels are');
+      console.log(datasetLabels);
       const filteredDataChart = dataset2chart(filteredDataSet, purchasingFields);
       setPurchasingDataChart(filteredDataChart);
       setDatasetLabels(datasetLabels);
     } else {
-      setAlertMessage('Sorry,   dataset visualization filtering currently available for today and yesterday 😔');
+      setAlertMessage('Sorry,   dataset visualization filtering currently available for today , yesterday, and last 7 days 😔');
     }
   }
-// var myChart;
+  // var myChart;
   useEffect(() => {
-    console.log('mychart is');
-    console.log(myChart);
-    // if (myChart) {
-    //   myChart.destroy();
-    // }
+    filterPurchaseData("LAST_7_DAYS");
+  }, []);
+  useEffect(() => {
+
     if (myChart) {
       myChart.destroy();
     }
@@ -92,6 +93,25 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
           <FilterPeriod expanded={expanded} setExpanded={setExpanded} toggleExpand={toggleExpand} filterPurchaseData={filterPurchaseData} />
         </div>
       </div>
+
+        <div className="greenbar">
+          <h3>MARKET INSIGHTS</h3>
+        </div>
+      
+        <div className="card sales-turnover">
+          <div className="card-header">
+            <p>Sales Turnover</p>
+
+          </div>
+          <div className="more-info">
+            <div>
+              <p class="sold-value">Rp 3,600,000</p>
+              <p class="mini-info"><span class="text-red"><i class="fas fa-arrow-down"></i> 12.8%</span> last period in products sold</p>
+            </div>
+            <div><img src={salesTurnover} alt="sales turnover icon" /></div>
+          </div>
+        </div>
+
       <div id="insights">
         <div className="page-header">
         </div>
