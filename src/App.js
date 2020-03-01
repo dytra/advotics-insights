@@ -10,7 +10,7 @@ export default function App() {
     setExpanded(!expanded)
   };
   return (
-    <div className="App" onClick={toggleExpand}>
+    <div className="App" onClick={() => setExpanded(false)}>
       <TopNav />
       <Main>
         <SideNav />

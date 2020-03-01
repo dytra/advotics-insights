@@ -190,7 +190,7 @@ const FilterPeriod = ({ expanded, setExpanded, toggleExpand, filterPurchaseData 
   }
   return (
     <div className="filter-period" onClick={e => e.stopPropagation()} style={{maxHeight: expanded ? '1.25em' : 'none'}}>
-      {!expanded && <div className="filter-period-unexpanded">
+      {!expanded && <div className="filter-period-unexpanded" onClick={toggleExpand}>
         <i className="far fa-calendar-alt"></i>
         <span>Period</span>
         <span className="date-range" style={dateRangeStyle}>{strSelectedDateRange}</span>

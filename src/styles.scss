@@ -9,10 +9,10 @@ html,
 body {
   height: 100%;
   background: #f7f7f7;
-    height: 100%;
+  height: 100%;
 }
 body {
-  height:100vh;
+  height: 100vh;
 }
 
 #root {
@@ -26,50 +26,49 @@ body {
 #top-nav {
   height: 4em;
   // border-bottom:1px solid $shadow-color;
-  position:relative;
-  box-shadow: 0px 5px 5px darken($shadow-color,5%);
+  position: relative;
+  box-shadow: 0px 5px 5px darken($shadow-color, 5%);
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-left: 1.5em;
-  padding-bottom:0;
+  padding-bottom: 0;
   // padding-bottom: .5em;
-  display:flex;
+  display: flex;
   z-index: 5;
   background: white;
   .left {
-    height:100%;
-    display:flex;
+    height: 100%;
+    display: flex;
     align-items: center;
     .logo {
       // display:none;
-      width:9em;
-      display:flex;
+      width: 9em;
+      display: flex;
       align-items: center;
       img {
         max-width: 100%;
         height: auto;
-
       }
     }
   }
   .right {
-    display:flex;
-    margin-left:auto;
-    padding:.5em 0;
+    display: flex;
+    margin-left: auto;
+    padding: 0.5em 0;
     padding-right: 1.5em;
     #btn-logout {
-      background:none;
-      border:none;
+      background: none;
+      border: none;
       font-size: 1.5rem;
-      color:$third-text-color;
+      color: $third-text-color;
       cursor: pointer;
     }
     #user-info {
-      display:flex;
+      display: flex;
       // flex-direction: column;
       margin-right: 1em;
       .profile-info {
-        display:flex;
+        display: flex;
         flex-direction: column;
         margin-right: 1em;
         .username {
@@ -77,14 +76,16 @@ body {
           color: $third-text-color;
         }
         .company-name {
-          font-size:.85rem;
-          color:$third-text-color;
+          font-size: 0.85rem;
+          color: $third-text-color;
         }
       }
       .profile-picture {
-        display:flex;
+        display: flex;
         align-items: center;
-        img {width:2.5em;}
+        img {
+          width: 2.5em;
+        }
       }
     }
   }
@@ -93,8 +94,8 @@ body {
 main {
   display: flex;
   height: 100%;
-  z-index:4;
-  position:relative;
+  z-index: 4;
+  position: relative;
   #side-nav {
     box-shadow: 0px 4px 5px $shadow-color;
     // border-right:1px solid $shadow-color;
@@ -104,6 +105,28 @@ main {
     height: 100%;
     // z-index: 10;
     background: white;
+    ul {
+      li {
+        display: block;
+        padding: 1em;
+        text-align: center;
+        &.burger {
+          color: $third-text-color;
+        }
+        &.chartmenu {
+          background: $shadow-color;
+          span {
+            display:block;
+            padding:.3em;
+            background: white;
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
   }
 
   .page {
@@ -221,7 +244,7 @@ main {
 .filter-period {
   // max-height: 1.25em;
   background: white;
-  
+
   color: $secondary-text-color;
   border-radius: 2px;
   box-shadow: 0px 2px 3px $shadow-color;
@@ -229,7 +252,6 @@ main {
   align-self: flex-end;
   // align-items: center;
   width: auto;
-  
 
   i,
   span,
@@ -242,17 +264,18 @@ main {
 
   .filter-period-unexpanded {
     padding: 1em;
-    height:100%;
+    height: 100%;
+    cursor:pointer;
     // padding:5em;
     // display:none;
   }
   .filter-period-expanded {
-    padding:1em;
+    padding: 1em;
     overflow: visible;
     position: relative;
     background: white;
     padding-left: 2em;
-    height:100%;
+    height: 100%;
     padding-bottom: 2em;
     padding-right: 2em;
     box-shadow: 0px 2px 3px $shadow-color;
@@ -263,14 +286,14 @@ main {
     }
     .picker-container {
       display: flex;
-      background:white;
+      background: white;
       .range-date-option {
         display: flex;
         flex-direction: column;
         border-right: 1px solid $shadow-color;
         padding-right: 1em;
         button {
-          cursor:pointer;
+          cursor: pointer;
           background: white;
           border: none;
           border-bottom: 1px solid $third-text-color;
@@ -279,7 +302,7 @@ main {
           font-size: 1rem;
           outline: none;
           min-width: 7em;
-          
+
           &:last-child {
             background: $success-background;
             border: none;
