@@ -40,7 +40,7 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
       setPurchasingDataChart(filteredDataChart);
       setDatasetLabels(datasetLabels);
     } else {
-      setAlertMessage('Sorry,   dataset visualization filtering currently available for today , yesterday, and last 7 days 😔');
+      setAlertMessage('Sorry,   dataset visualization filtering currently available for option today , yesterday, and last 7 days 😔');
     }
   }
   // var myChart;
