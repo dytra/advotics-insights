@@ -1,10 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "chart.js";
-import { dataset2chart } from "../utils";
+import { dataset2chart, filterDataset, getDatasetLabels } from "../utils";
 import Card from "./Card.js";
 import ListProducts from "./ListProducts";
 import FilterPeriod from "./FilterPeriod";
+
 const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, topCompetitorDataset, expanded, setExpanded, toggleExpand }) => {
+  const [purchasingDataChart, setPurchasingDataChart] = useState(dataset2chart(purchasingDataset, purchasingFields));
+  const [datasetLabels, setDatasetLabels] = useState([
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July"
+  ]);
+  const [myChart,setMyChart] = useState('');
+  const [alertMessage,setAlertMessage] = useState('');
 
   window.chartColors = {
     red: "rgb(255, 99, 132)",
@@ -15,23 +28,35 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
     purple: "rgb(153, 102, 255)",
     grey: "rgb(201, 203, 207)"
   };
+
+  const filterPurchaseData = (filterMode) => {
+    if (filterMode === 'TODAY' || filterMode === 'YESTERDAY') {
+      setAlertMessage('');
+      const filteredDataSet = filterDataset({ dataset: purchasingDataset, filterMode, option: null });
+      const datasetLabels = getDatasetLabels(filterMode);
+      const filteredDataChart = dataset2chart(filteredDataSet, purchasingFields);
+      setPurchasingDataChart(filteredDataChart);
+      setDatasetLabels(datasetLabels);
+    } else {
+      setAlertMessage('Sorry,   dataset visualization filtering currently available for today and yesterday 😔');
+    }
+  }
+// var myChart;
   useEffect(() => {
-    const purchasingDataChart = dataset2chart(purchasingDataset, purchasingFields);
-    console.log('purchasing datachart');
-    console.log(purchasingDataChart);
-    const ctx = document.getElementById("myChart").getContext("2d");
-    new Chart(ctx, {
+    console.log('mychart is');
+    console.log(myChart);
+    // if (myChart) {
+    //   myChart.destroy();
+    // }
+    if (myChart) {
+      myChart.destroy();
+    }
+    const canvas = document.getElementById("myChart");
+    const ctx = canvas.getContext("2d");
+    setMyChart(new Chart(ctx, {
       type: "bar",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
+        labels: datasetLabels,
         datasets: purchasingDataChart
       },
       options: {
@@ -57,14 +82,14 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
           ]
         }
       }
-    });
-  }, [purchasingDataset, purchasingFields]);
+    }));
+  }, [purchasingDataset, purchasingFields, purchasingDataChart]);
   return (
     <div className="page">
       <div className="page-header">
         <h1>Dashboard</h1>
         <div className="filterperiod-container">
-          <FilterPeriod expanded={expanded} setExpanded={setExpanded} toggleExpand={toggleExpand} />
+          <FilterPeriod expanded={expanded} setExpanded={setExpanded} toggleExpand={toggleExpand} filterPurchaseData={filterPurchaseData} />
         </div>
       </div>
       <div id="insights">
@@ -72,6 +97,7 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
         </div>
         <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
           <canvas id="myChart" />
+          {alertMessage && <p>{alertMessage}</p>}
         </Card>
 
         <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">

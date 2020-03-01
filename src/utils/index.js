@@ -1,3 +1,3 @@
 import dataset2chart from "./dataset2chart";
-
-export {dataset2chart}
+import {filterDataset,getDatasetLabels} from "./filterdataset";
+export {dataset2chart,filterDataset,getDatasetLabels}

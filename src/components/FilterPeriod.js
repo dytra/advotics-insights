@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.min.css";
 import "./FilterPeriode.scss";
 import { format, subDays, eachDayOfInterval, subMonths,addMonths } from "date-fns";
 import { startOfMonth } from "date-fns/esm";
-const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
+const FilterPeriod = ({expanded,setExpanded,toggleExpand,filterPurchaseData}) => {
 
   const dateRangeStyle = expanded ? { display: 'none' } : { display: 'inline' };
   const [filterMode, setFilterMode] = useState('LAST_7_DAYS');
@@ -137,6 +137,7 @@ const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
     const strEndDate = format(endDate, 'd MMMM yyyy');
     setStrSelectedDataRange(`${strStartDate} - ${strEndDate}`);
     setExpanded(false);
+    filterPurchaseData(filterMode);
   }
 
   /* selectedDateRange listener */
