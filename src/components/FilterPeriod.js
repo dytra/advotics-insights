@@ -110,8 +110,11 @@ const FilterPeriod = () => {
         }));
         break;
       case "CUSTOM":
-        setStartDate(subMonths(new Date(), 6));
-        setEndDate(new Date());
+        /* reset clock to 00:00 to prevent backdate on calling eachDayOfInterval */
+        const currentDate = new Date();
+        const currentDateReset = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+        setStartDate(subMonths(currentDateReset, 6));
+        setEndDate(subMonths(currentDateReset, 6));
         setMinStartDate(subMonths(new Date(), 6));
         setMaxStartDate(new Date());
         setMinEndDate(subMonths(new Date(), 6));
@@ -156,11 +159,12 @@ const FilterPeriod = () => {
         setStartDate(date);
         setMinEndDate(date);
         setHighlightedStartDate({});
+        setEndDate(date);
 
       } else {
         setEndDate(date);
         setHighlightedStartDate(eachDayOfInterval({
-          start: new Date(startDate),
+          start: startDate,
           end: new Date(date),
         }));
 
