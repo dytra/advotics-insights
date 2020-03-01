@@ -140,7 +140,28 @@ const purchasingDataset = [
     lpt: 1000
   },
   {
-    date: new Date("2020-02-29"),
+    date: new Date("2020-03-29"),
+    gross: 15000,
+    nett: 10000,
+    apv: 3000,
+    lpt: 1000
+  },
+  {
+    date: new Date("2020-02-22"),
+    gross: 15000,
+    nett: 10000,
+    apv: 3000,
+    lpt: 1000
+  },
+  {
+    date: new Date("2020-02-21"),
+    gross: 15000,
+    nett: 10000,
+    apv: 3000,
+    lpt: 1000
+  },
+  {
+    date: new Date("2020-02-28"),
     gross: 15000,
     nett: 10000,
     apv: 3000,
