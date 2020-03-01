@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Chart } from "chart.js";
 import { dataset2chart, filterDataset, getDatasetLabels } from "../utils";
 import Card from "./Card.js";
@@ -29,7 +29,7 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
     grey: "rgb(201, 203, 207)"
   };
 
-  const filterPurchaseData = (filterMode) => {
+  const filterPurchaseData = useCallback((filterMode) => {
     if (filterMode === 'TODAY' || filterMode === 'YESTERDAY' || filterMode === 'LAST_7_DAYS') {
       setAlertMessage('');
       const filteredDataSet = filterDataset({ dataset: purchasingDataset, filterMode, option: null });
@@ -40,11 +40,13 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
     } else {
       setAlertMessage('Sorry,   dataset visualization filtering currently available for option today , yesterday, and last 7 days 😔');
     }
-  }
-  // var myChart;
+  }, [purchasingDataset, purchasingFields]);
+
+  /* prevent infinite loop */
+  const callFilterPurchaseData = useCallback(() => { filterPurchaseData("LAST_7_DAYS") }, [filterPurchaseData]);
   useEffect(() => {
-    filterPurchaseData("LAST_7_DAYS");
-  }, []);
+    callFilterPurchaseData();
+  }, [callFilterPurchaseData]);
   useEffect(() => {
 
     if (myChart) {
@@ -81,8 +83,8 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
           ]
         }
       }
-    }));
-  }, [purchasingDataset, purchasingFields, purchasingDataChart]);
+    })); // eslint-disable-next-line 
+  }, [purchasingDataset, purchasingFields, purchasingDataChart,datasetLabels]);
   return (
     <div className="page">
       <div className="page-header">
@@ -92,32 +94,32 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
         </div>
       </div>
 
-        <div className="greenbar">
-          <h3>MARKET INSIGHTS</h3>
-        </div>
+      <div className="greenbar">
+        <h3>MARKET INSIGHTS</h3>
+      </div>
 
-        {alertMessage && <p className="alert">{alertMessage}</p>}
-      
-        <div className="card sales-turnover">
-          <div className="card-header">
-            <p>Sales Turnover</p>
+      {alertMessage && <p className="alert">{alertMessage}</p>}
 
-          </div>
-          <div className="more-info">
-            <div>
-              <p className="sold-value">Rp 3,600,000</p>
-              <p className="mini-info"><span className="text-red"><i className="fas fa-arrow-down"></i> 12.8%</span> last period in products sold</p>
-            </div>
-            <div><img src={salesTurnover} alt="sales turnover icon" /></div>
-          </div>
+      <div className="card sales-turnover">
+        <div className="card-header">
+          <p>Sales Turnover</p>
+
         </div>
+        <div className="more-info">
+          <div>
+            <p className="sold-value">Rp 3,600,000</p>
+            <p className="mini-info"><span className="text-red"><i className="fas fa-arrow-down"></i> 12.8%</span> last period in products sold</p>
+          </div>
+          <div><img src={salesTurnover} alt="sales turnover icon" /></div>
+        </div>
+      </div>
 
       <div id="insights">
         <div className="page-header">
         </div>
         <Card id="chart" title="AVERAGE PUCRCHASE VALUE">
           <canvas id="myChart" />
-          
+
         </Card>
 
         <Card id="best-sales" className="list-product-card" title="BEST SALES SKU">

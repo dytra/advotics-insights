@@ -12,7 +12,7 @@ const TopNav = () => {
         <div className="profile-info">
           <p className="username">Username</p><p className="company-name">Company Name</p>
         </div>
-        <div className="profile-picture"><img src={profilePicture} /></div>
+        <div className="profile-picture"><img src={profilePicture} alt="profile" /></div>
       </div>
       <button id="btn-logout"><i className="fas fa-sign-out-alt"></i></button>
     </div>
