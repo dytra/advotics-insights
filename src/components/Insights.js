@@ -105,8 +105,8 @@ const Insights = ({ purchasingDataset, purchasingFields, bestSellingDataset, top
           </div>
           <div className="more-info">
             <div>
-              <p class="sold-value">Rp 3,600,000</p>
-              <p class="mini-info"><span class="text-red"><i class="fas fa-arrow-down"></i> 12.8%</span> last period in products sold</p>
+              <p className="sold-value">Rp 3,600,000</p>
+              <p className="mini-info"><span class="text-red"><i className="fas fa-arrow-down"></i> 12.8%</span> last period in products sold</p>
             </div>
             <div><img src={salesTurnover} alt="sales turnover icon" /></div>
           </div>

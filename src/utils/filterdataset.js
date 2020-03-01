@@ -60,8 +60,7 @@ export const getDatasetLabels = (filterMode) => {
       end: subDays(new Date(), 1),
     })
     .map(date => format(date, 'dd-MMM-yyyy'));
-    console.log('labelzz');
-    console.log(labels);
+
   }
   return labels;
 }
