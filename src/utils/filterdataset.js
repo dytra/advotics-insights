@@ -1,4 +1,4 @@
-import { isSameDay, isSameWeek, subDays, eachDayOfInterval } from "date-fns";
+import { isSameDay, subDays, eachDayOfInterval } from "date-fns";
 import { format } from "date-fns/esm";
 export const filterDataset = ({ dataset, filterMode, option }) => {
   if (filterMode === 'TODAY') {
@@ -19,7 +19,7 @@ export const filterDataset = ({ dataset, filterMode, option }) => {
   } else if (filterMode === 'LAST_7_DAYS') {
     /* filter for 7 days */
     const filtered = dataset.filter(item => {
-      return isSameWeek(new Date(item.date), subDays(new Date(), 1));
+      return new Date(item.date) < new Date() && new Date(item.date) > subDays(new Date(),7);
     });
     const sorted = filtered.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
     return sorted;
