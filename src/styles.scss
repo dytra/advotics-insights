@@ -8,6 +8,7 @@
 html,
 body {
   height: 100%;
+  background: #f7f7f7;
 }
 #root {
   height: 100%;
@@ -18,13 +19,69 @@ body {
 }
 
 #top-nav {
-  height: 3.5em;
+  height: 4em;
   // border-bottom:1px solid $shadow-color;
   box-shadow: 0px 2px 3px $shadow-color;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-left: 0.5em;
+  padding-bottom:0;
+  // padding-bottom: .5em;
+  display:flex;
   z-index: 1;
+  background: white;
+  .left {
+    height:100%;
+    display:flex;
+    align-items: center;
+    .logo {
+      // display:none;
+      width:9em;
+      display:flex;
+      align-items: center;
+      img {
+        max-width: 100%;
+        height: auto;
+
+      }
+    }
+  }
+  .right {
+    display:flex;
+    margin-left:auto;
+    padding:.5em 0;
+    padding-right: 1.5em;
+    #btn-logout {
+      background:none;
+      border:none;
+      font-size: 1.5rem;
+      color:$third-text-color;
+      cursor: pointer;
+    }
+    #user-info {
+      display:flex;
+      // flex-direction: column;
+      margin-right: 1em;
+      .profile-info {
+        display:flex;
+        flex-direction: column;
+        margin-right: 1em;
+        .username {
+          font-size: 1rem;
+          color: $third-text-color;
+        }
+        .company-name {
+          font-size:.85rem;
+          color:$third-text-color;
+        }
+      }
+      .profile-picture {
+        display:flex;
+        align-items: center;
+        img {width:2.5em;}
+      }
+    }
+  }
 }
 
 main {
@@ -46,6 +103,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 2em;
+    height: 100%;
     background: $secondary-background;
     .page-header {
       // padding-left: 2em;
@@ -202,7 +260,7 @@ main {
           padding: 0.5em 0;
           font-size: 1rem;
           outline: none;
-          min-width:7em;
+          min-width: 7em;
           &:last-child {
             background: $success-background;
             border: none;
@@ -214,9 +272,9 @@ main {
         }
       }
       .calendar {
-        display:flex;
+        display: flex;
         div .react-datepicker:first-child {
-          margin-right:1em;
+          margin-right: 1em;
         }
       }
     }
@@ -226,49 +284,48 @@ main {
 }
 
 .sales-turnover {
-  width:18em;
-  display:flex;
-  flex-direction:column;
-  padding:1em;
+  width: 18em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
   .card-header {
     p {
       color: $secondary-text-color;
       // font-weight: bold;
     }
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
   .more-info {
-    display:flex;
+    display: flex;
     img {
-      width:5em;
-      height:5em;
+      width: 5em;
+      height: 5em;
     }
     .sold-value {
       font-size: 2.25rem;
       font-weight: 600;
-      margin-bottom: .25em;
+      margin-bottom: 0.25em;
     }
 
     .mini-info {
-      font-size: .85rem;
+      font-size: 0.85rem;
     }
   }
 }
 
 .text-red {
-  color:red;
+  color: red;
   font-weight: 600;
-  
 }
 
 .greenbar {
-  display:flex;
-  flex:1;
-  background:$success-background;
-  padding:.85em;
+  display: flex;
+  flex: 1;
+  background: $success-background;
+  padding: 0.85em;
   font-weight: 600;
-  font-size: .85rem;
-  color:white;
+  font-size: 0.85rem;
+  color: white;
   margin-bottom: 2em;
   border-radius: 2px;
 }
