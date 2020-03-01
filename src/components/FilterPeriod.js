@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.min.css";
 import "./FilterPeriode.scss";
-import { format, subDays, eachDayOfInterval, subMonths } from "date-fns";
+import { format, subDays, eachDayOfInterval, subMonths,addMonths } from "date-fns";
 import { startOfMonth } from "date-fns/esm";
 const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
 
@@ -114,7 +114,7 @@ const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
         const currentDateReset = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
         setStartDate(subMonths(currentDateReset, 6));
         setEndDate(subMonths(currentDateReset, 6));
-        setMinStartDate(subMonths(new Date(), 6));
+        setMinStartDate(null);
         setMaxStartDate(new Date());
         setMinEndDate(subMonths(new Date(), 6));
         setMaxEndDate(new Date());
@@ -160,6 +160,12 @@ const FilterPeriod = ({expanded,setExpanded,toggleExpand}) => {
         setMinEndDate(date);
         setHighlightedStartDate({});
         setEndDate(date);
+        /* for filtering 6 months time range & future dates */
+        const poleDate = subMonths(new Date(),6);
+        if(date < poleDate)
+          setMaxEndDate(addMonths(date,6)); /* max range 6 months */
+        else
+          setMaxEndDate(new Date());
 
       } else {
         setEndDate(date);
