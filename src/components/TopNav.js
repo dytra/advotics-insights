@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/advotics-logo.jpg";
+import logo from "../assets/logo.png";
 import profilePicture from "../assets/profile.svg";
 const TopNav = () => {
   return <nav id="top-nav">
